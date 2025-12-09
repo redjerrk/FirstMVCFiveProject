@@ -1,0 +1,20 @@
+@model FirstMVCFiveProject.Models.Student
+<div class="card rounded shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Delete Student</h5>
+        <p>Are you sure?</p>
+        <dl class="row">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+            <dt class="col-sm-3">Roll No</dt>
+            <dd class="col-sm-9">@Model.RollNo</dd>
+        </dl>
+        @using (Html.BeginForm("DeleteAjax", "Students", FormMethod.Post, new { id = "delete-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <button type="submit" class="btn btn-danger rounded">Delete</button>
+            <button type="button" class="btn btn-secondary rounded js-back ms-2">Cancel</button>
+        }
+    </div>
+</div>

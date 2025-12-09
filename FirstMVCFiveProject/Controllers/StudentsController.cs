@@ -1,8 +1,8 @@
-
 using System.Net;
 using System.Web.Mvc;
 using FirstMVCFiveProject.Models;
 using FirstMVCFiveProject.UnitOfWork;
+using System.Linq;
 
 namespace FirstMVCFiveProject.Controllers
 {
@@ -22,6 +22,83 @@ namespace FirstMVCFiveProject.Controllers
             return View(students);
         }
 
+        // SPA partials
+        public ActionResult ListPartial()
+        {
+            var students = _uow.Students.GetAll();
+            return PartialView("_List", students);
+        }
+
+        public ActionResult DetailsPartial(int? id)
+        {
+            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var student = _uow.Students.GetById(id.Value);
+            if (student == null) return HttpNotFound();
+            return PartialView("_DetailsPartial", student);
+        }
+
+        public ActionResult CreatePartial()
+        {
+            return PartialView("_CreatePartial", new Student());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateAjax(Student student)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_CreatePartial", student);
+            }
+
+            _uow.Students.Add(student);
+            _uow.Complete();
+            return Json(new { success = true });
+        }
+
+        public ActionResult EditPartial(int? id)
+        {
+            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var student = _uow.Students.GetById(id.Value);
+            if (student == null) return HttpNotFound();
+            return PartialView("_EditPartial", student);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditAjax(Student student)
+        {
+            if (!ModelState.IsValid)
+            {
+                return PartialView("_EditPartial", student);
+            }
+
+            _uow.Students.Update(student);
+            _uow.Complete();
+            return Json(new { success = true });
+        }
+
+        public ActionResult DeletePartial(int? id)
+        {
+            if (!id.HasValue) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var student = _uow.Students.GetById(id.Value);
+            if (student == null) return HttpNotFound();
+            return PartialView("_DeletePartial", student);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteAjax(int id)
+        {
+            var student = _uow.Students.GetById(id);
+            if (student == null) return HttpNotFound();
+
+            _uow.Students.Remove(student);
+            _uow.Complete();
+            return Json(new { success = true });
+        }
+
+        // Keep existing full-page actions for non-AJAX fallback
         // GET: Students/Details/5
         public ActionResult Details(int? id)
         {

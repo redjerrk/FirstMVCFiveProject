@@ -206,6 +206,11 @@
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Students\Edit.cshtml" />
     <Content Include="Views\Students\Delete.cshtml" />
+    <Content Include="Views\Students\_List.cshtml" />
+    <Content Include="Views\Students\_DetailsPartial.cshtml" />
+    <Content Include="Views\Students\_CreatePartial.cshtml" />
+    <Content Include="Views\Students\_EditPartial.cshtml" />
+    <Content Include="Views\Students\_DeletePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

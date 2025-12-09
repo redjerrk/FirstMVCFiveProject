@@ -1,0 +1,19 @@
+@model FirstMVCFiveProject.Models.Student
+<div class="card rounded shadow-sm">
+    <div class="card-body">
+        <h5 class="card-title">Student Details</h5>
+        <dl class="row">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+            <dt class="col-sm-3">Roll No</dt>
+            <dd class="col-sm-9">@Model.RollNo</dd>
+            <dt class="col-sm-3">Age</dt>
+            <dd class="col-sm-9">@Model.Age</dd>
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+        </dl>
+        <div class="mt-3">
+            <button class="btn btn-secondary rounded js-back">Back</button>
+        </div>
+    </div>
+</div>
