@@ -1,0 +1,39 @@
+@model FirstMVCFiveProject.Models.Student
+
+@{
+    ViewBag.Title = "Create Student";
+}
+
+<div class="card rounded shadow-sm">
+    <div class="card-body">
+        <h3 class="card-title">Create Student</h3>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+           <div class="mb-3">
+                @Html.LabelFor(m => m.RollNo, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.RollNo, new { @class = "form-control rounded" })
+                @Html.ValidationMessageFor(m => m.RollNo, "", new { @class = "text-danger" })
+            </div>
+           <div class="mb-3">
+                @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Name, new { @class = "form-control rounded" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+            </div>
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Age, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Age, new { @class = "form-control rounded" })
+                @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
+            </div>
+           <div class="mb-3">
+                @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control rounded" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-primary rounded">Create</button>
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary rounded ms-2" })
+        }
+    </div>
+</div>
+

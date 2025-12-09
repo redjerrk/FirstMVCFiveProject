@@ -1,0 +1,29 @@
+@model FirstMVCFiveProject.Models.Student
+
+@{
+    ViewBag.Title = "Delete Student";
+}
+
+<div class="card rounded shadow-sm">
+    <div class="card-body">
+        <h3 class="card-title">Delete Student</h3>
+        <p>Are you sure you want to delete this?</p>
+n        <dl class="row">
+            <dt class="col-sm-3">Id</dt>
+            <dd class="col-sm-9">@Model.Id</dd>
+n            <dt class="col-sm-3">Roll No</dt>
+            <dd class="col-sm-9">@Model.RollNo</dd>
+n            <dt class="col-sm-3">Age</dt>
+            <dd class="col-sm-9">@Model.Age</dd>
+n            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+        </dl>
+n        @using (Html.BeginForm("DeleteConfirmed", "Students", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <button type="submit" class="btn btn-danger rounded">Delete</button>
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary rounded ms-2" })
+        }
+    </div>
+</div>
